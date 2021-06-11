@@ -10,6 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.yibochi.composeroad.ui.theme.ComposeRoadTheme
 
+/*
+ * Compose博物馆
+ * https://docs.compose.net.cn
+ */
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
