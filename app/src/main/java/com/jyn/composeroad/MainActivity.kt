@@ -33,12 +33,13 @@ import androidx.compose.ui.unit.sp
  */
 class MainActivity : ComponentActivity() {
 
-//    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PreviewTest()
+//            PreviewTest()
+            ListTest()
         }
     }
 
@@ -81,36 +82,38 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.spacedBy(5.dp) //在每个项目之间增加了 4.dp 的空间
         ) {
             // ImageView
-//            item {
-//                Image(
-//                    painter = painterResource(id = R.mipmap.image_compose_tutorial),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .height(100.dp)
-//                        .fillMaxWidth()
-//                        .clip(shape = RoundedCornerShape(4.dp)),
-//                    contentScale = ContentScale.Crop
-//                )
-//            }
+            item {
+                Image(
+                    painter = painterResource(id = R.mipmap.image_compose_tutorial),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(100.dp)
+                        .fillMaxWidth()
+                        .clip(shape = RoundedCornerShape(4.dp)),
+                    contentScale = ContentScale.Crop
+                )
+            }
             // Text
             item {
                 Text(
                     text = "Hello Compose",
-//                    style = TextStyle(fontSize = 20.sp)
+                    style = TextStyle(fontSize = 20.sp)
                 )
-//                Text(
-//                    text = "Jetpack Compose 是用于构建原生界面的最新的 Android 工具包，采用声明式 UI 的设计，拥有更简单的自定义和实时的交互预览功能，由 Android 官方团队全新打造的 UI 框架",
-//                    style = MaterialTheme.typography.body2,
-//                    maxLines = 2,
-//                    overflow = TextOverflow.Ellipsis,
-//                )
+                Text(
+                    text = "Jetpack Compose 是用于构建原生界面的最新的 Android 工具包，采用声明式 UI 的设计，拥有更简单的自定义和实时的交互预览功能，由 Android 官方团队全新打造的 UI 框架",
+                    style = MaterialTheme.typography.body2,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
             }
             // Button
-//            item {
-//                Button(onClick = { viewModel.btnAdd() }) {
-//                    Text("这是一个Button ${viewModel.btnInt}")
-//                }
-//            }
+            item {
+                Button(onClick = { viewModel.btnAdd() }) {
+                    Text(
+                        text = "这是一个Button ${viewModel.btnInt.value}",
+                    )
+                }
+            }
         }
     }
 }
