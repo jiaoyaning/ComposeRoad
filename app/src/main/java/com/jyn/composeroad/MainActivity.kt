@@ -108,7 +108,10 @@ class MainActivity : ComponentActivity() {
             }
             // Button
             item {
-                Button(onClick = { viewModel.btnAdd() }) {
+                Button(
+                    onClick = { viewModel.btnAdd() },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Text(
                         text = "这是一个Button ${viewModel.btnInt.value}",
                     )
