@@ -1,4 +1,4 @@
-package com.yibochi.composeroad
+package com.jyn.composeroad
 
 import org.junit.Test
 

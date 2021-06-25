@@ -1,4 +1,4 @@
-package com.yibochi.composeroad.ui.theme
+package com.jyn.composeroad.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

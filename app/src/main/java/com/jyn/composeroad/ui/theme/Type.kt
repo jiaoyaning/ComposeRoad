@@ -1,4 +1,4 @@
-package com.yibochi.composeroad.ui.theme
+package com.jyn.composeroad.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
