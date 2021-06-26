@@ -9,10 +9,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rxjava2.subscribeAsState
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jyn.composeroad.状态.Btn
 
 /*
  * 官方文档
@@ -38,43 +41,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            PreviewTest()
             ListTest()
         }
     }
 
     @Preview
     @Composable
-    fun PreviewTest() {
-        Column(modifier = Modifier.padding(10.dp)) {
-            Image(
-                painter = painterResource(id = R.mipmap.icon_master_road),
-                contentDescription = null,
-                modifier = Modifier
-                    .height(100.dp)
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(4.dp)),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "Hello Compose",
-                style = TextStyle(fontSize = 20.sp)
-            )
-            Text(
-                text = "这是一个Preview的文字，可以很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长",
-                style = MaterialTheme.typography.body2,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-        }
-    }
-
-    @Composable
     fun ListTest() {
         LazyColumn(
-            modifier = Modifier
-                .background(Color.White),
+            modifier = Modifier.background(Color.White),
             contentPadding = PaddingValues(
                 horizontal = 10.dp,//水平边缘（左和右）添加 10.dp 的 padding
                 vertical = 10.dp //然后在内容的顶部和底部添加 10.dp
@@ -106,16 +81,42 @@ class MainActivity : ComponentActivity() {
                     overflow = TextOverflow.Ellipsis,
                 )
             }
-            // Button
+
+            /*
+             * Button & 状态管理
+             * https://developer.android.google.cn/jetpack/compose/state
+             */
             item {
-                Button(
-                    onClick = { viewModel.btnAdd() },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "这是一个Button ${viewModel.btnInt.value}",
-                    )
-                }
+                var remember by remember { mutableStateOf(0) }//不保持状态
+                Btn(
+                    onClick = { remember++ },
+                    text = "remember Button $remember"
+                )
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                var rememberSaveable by rememberSaveable { mutableStateOf(0) }//保持状态
+                Btn(
+                    onClick = { rememberSaveable++ },
+                    text = "rememberSaveable Button $rememberSaveable"
+                )
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                val liveData by viewModel.liveData.observeAsState()//保持状态
+                Btn(
+                    onClick = { viewModel.liveDataAdd() },
+                    text = "liveData Button $liveData"
+                )
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                val rxJava2 by viewModel.observable.subscribeAsState(initial = 0)//不保持状态
+
+                Btn(
+                    onClick = { viewModel.rxJava2Add(rxJava2) },
+                    text = "rxJava2 Button $rxJava2"
+                )
             }
         }
     }
