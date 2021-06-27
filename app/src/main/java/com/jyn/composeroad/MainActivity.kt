@@ -25,7 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jyn.composeroad.状态.Btn
+import com.jyn.composeroad.state.Btn
+import com.jyn.composeroad.state.StateTest
 
 /*
  * 官方文档
@@ -45,6 +46,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    /**
+     * Preview的注解中比较常用的参数如下：
+     *  name: String: 为该Preview命名，该名字会在布局预览中显示。
+     *  showBackground: Boolean: 是否显示背景，true为显示。
+     *  backgroundColor: Long: 设置背景的颜色。
+     *  showDecoration: Boolean: 是否显示Statusbar和Toolbar，true为显示。
+     *  group: String: 为该Preview设置group名字，可以在UI中以group为单位显示。
+     *  fontScale: Float: 可以在预览中对字体放大，范围是从0.01。
+     *  widthDp: Int: 在Compose中渲染的最大宽度，单位为dp。
+     *  heightDp: Int: 在Compose中渲染的最大高度，单位为dp。
+     */
     @Preview
     @Composable
     fun ListTest() {
@@ -84,40 +96,8 @@ class MainActivity : ComponentActivity() {
 
             /*
              * Button & 状态管理
-             * https://developer.android.google.cn/jetpack/compose/state
              */
-            item {
-                var remember by remember { mutableStateOf(0) }//不保持状态
-                Btn(
-                    onClick = { remember++ },
-                    text = "remember Button $remember"
-                )
-
-                Spacer(modifier = Modifier.height(5.dp))
-
-                var rememberSaveable by rememberSaveable { mutableStateOf(0) }//保持状态
-                Btn(
-                    onClick = { rememberSaveable++ },
-                    text = "rememberSaveable Button $rememberSaveable"
-                )
-
-                Spacer(modifier = Modifier.height(5.dp))
-
-                val liveData by viewModel.liveData.observeAsState()//保持状态
-                Btn(
-                    onClick = { viewModel.liveDataAdd() },
-                    text = "liveData Button $liveData"
-                )
-
-                Spacer(modifier = Modifier.height(5.dp))
-
-                val rxJava2 by viewModel.observable.subscribeAsState(initial = 0)//不保持状态
-
-                Btn(
-                    onClick = { viewModel.rxJava2Add(rxJava2) },
-                    text = "rxJava2 Button $rxJava2"
-                )
-            }
+            item { StateTest(viewModel) }
         }
     }
 }
