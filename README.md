@@ -1,6 +1,12 @@
 ## 图解 Modifier 背后原理 ，竟如此简单！
 https://juejin.cn/post/6986933061845778446
 
+## Compose Modifier修饰符绝对详细的解说，学不会你打我表弟
+https://juejin.cn/post/6978109557121744932
+
+## Jetpack Compose实现的天气动画！可爱~
+https://mp.weixin.qq.com/s/ZVxwOLUFR7xIdoUazhPynA
+
 ## “声明式UI“和“命令式UI“，你的理解可能是错的
 https://blog.csdn.net/a774057695/article/details/114437463
 
