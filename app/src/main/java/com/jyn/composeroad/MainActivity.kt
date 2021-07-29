@@ -32,8 +32,8 @@ import com.jyn.composeroad.state.StateTest
  * 官方文档
  * https://developer.android.google.cn/jetpack/compose
  *
- * Compose博物馆
- * https://docs.compose.net.cn
+ * Compose博物馆：https://compose.net.cn/
+ * https://github.com/compose-museum/hi-compose
  */
 class MainActivity : ComponentActivity() {
 
