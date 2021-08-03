@@ -2,8 +2,10 @@ package com.jyn.composeroad
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,6 +19,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -100,28 +103,36 @@ class MainActivity : BaseActivity() {
 
     @Composable
     fun Typography() {
-        var isExpanded by remember { mutableStateOf(false) } // 创建一个能够检测卡片十分被展开的变量
+        // 创建一个能够检测卡片十分被展开的变量
+        var isExpanded by remember { mutableStateOf(false) }
+
+        // 创建一个能够根据 isExpanded 变量值而改变颜色的变量
+        val surfaceColor by animateColorAsState(
+            targetValue = if (isExpanded) Color(0xFFCCCCCC) else MaterialTheme.colors.surface
+        )
 
         Column(modifier = Modifier
             .padding(all = 5.dp)
-            .clickable { // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果
-                isExpanded = !isExpanded
-            }) {
+            .background(surfaceColor)
+            // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果
+            .clickable { isExpanded = !isExpanded }
+        ) {
             Row {
                 Image(
-                    painterResource(id = R.mipmap.logo),
+                    painter = painterResource(id = R.mipmap.logo),
                     contentDescription = "",
                     modifier = Modifier
                         .size(26.dp)
                         .clip(CircleShape)
+                        // 添加边框
                         .border(
                             1.5.dp,
                             MaterialTheme.colors.secondary,
                             shape = CircleShape
-                        ), // 添加边框
+                        )
                 )
                 Text(
-                    text = "Hello Compose",
+                    "Hello Compose",
                     color = MaterialTheme.colors.secondaryVariant,
                     style = TextStyle(fontSize = 20.sp)
                 )
