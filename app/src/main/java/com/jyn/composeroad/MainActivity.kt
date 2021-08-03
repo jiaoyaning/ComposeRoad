@@ -112,10 +112,10 @@ class MainActivity : BaseActivity() {
         )
 
         Column(modifier = Modifier
-            .padding(all = 5.dp)
-            .background(surfaceColor)
-            // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果
+            // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果，顺序很重要
             .clickable { isExpanded = !isExpanded }
+            .background(surfaceColor)
+            .padding(all = 5.dp) //如果放在前面可能会导致background少了这个5dp
         ) {
             Row {
                 Image(
