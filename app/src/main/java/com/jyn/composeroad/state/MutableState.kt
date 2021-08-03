@@ -11,13 +11,12 @@ import androidx.compose.runtime.rxjava2.subscribeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jyn.composeroad.MainViewModel
 
 /**
  * https://developer.android.google.cn/jetpack/compose/state
  */
 @Composable
-fun StateTest(viewModel: MainViewModel) {
+fun StateTest(viewModel: StateViewModel) {
     var remember by remember { mutableStateOf(0) }//不保持状态
     Btn(
         onClick = { remember++ },
