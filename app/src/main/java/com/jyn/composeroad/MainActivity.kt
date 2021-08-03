@@ -80,6 +80,36 @@ class MainActivity : BaseActivity() {
 
             // Button & 状态管理
             item { ButtonAndState() }
+
+            /**
+             * 布局
+             * https://compose.net.cn/layout/overview/
+             */
+            item { }
+
+            /**
+             * 动画
+             * https://compose.net.cn/design/animation/overview/
+             */
+            item { }
+
+            /**
+             * 主题
+             * https://compose.net.cn/design/theme/overview/
+             */
+            item { }
+
+            /**
+             * 手势
+             * https://compose.net.cn/design/gesture/overview/
+             */
+            item { }
+
+            /**
+             * 列表
+             * https://compose.net.cn/design/lists/overview/
+             */
+            item { }
         }
     }
 

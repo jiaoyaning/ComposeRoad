@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeRoad">
         <activity
+            android:name=".layout.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.ComposeRoad.NoActionBar" />
+        <activity
             android:name=".state.StateActivity"
             android:exported="true"
             android:label="@string/title_activity_state"
