@@ -33,8 +33,9 @@ import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 /*
- * 官方文档
+ * 官方教程 & 文档
  * https://developer.android.google.cn/jetpack/compose
+ * https://developer.android.google.cn/jetpack/compose/documentation
  *
  * Compose博物馆：https://compose.net.cn/
  * https://github.com/compose-museum/hi-compose
@@ -72,7 +73,7 @@ class MainActivity : BaseActivity() {
             // Image
             item { Image() }
 
-            // Text 颜色(Color) 排版(Typography) 形状(Shape)
+            // 颜色(Color) 排版(Typography) 形状(Shape)
             item { Typography() }
 
             // Spacer
@@ -82,32 +83,49 @@ class MainActivity : BaseActivity() {
             item { ButtonAndState() }
 
             /**
-             * 布局
+             * 布局 :
              * https://compose.net.cn/layout/overview/
+             * https://developer.android.google.cn/jetpack/compose/layouts
              */
             item { }
 
             /**
              * 动画
              * https://compose.net.cn/design/animation/overview/
+             * https://developer.android.google.cn/jetpack/compose/animation
              */
             item { }
 
             /**
-             * 主题
+             * 主题 : 如何为基于 Compose 的界面设置主题背景
              * https://compose.net.cn/design/theme/overview/
+             * https://developer.android.google.cn/jetpack/compose/themes
              */
             item { }
 
             /**
-             * 手势
+             * 手势 : 检测用户手势并与之互动
              * https://compose.net.cn/design/gesture/overview/
+             * https://developer.android.google.cn/jetpack/compose/gestures
              */
             item { }
 
             /**
-             * 列表
+             * 列表 : 管理和显示数据列表的一些选项
              * https://compose.net.cn/design/lists/overview/
+             * https://developer.android.google.cn/jetpack/compose/lists
+             */
+            item { }
+
+            /**
+             * 图形 : 构建和处理自定义图形的功能
+             * https://developer.android.google.cn/jetpack/compose/graphics
+             */
+            item { }
+
+            /**
+             * 文本
+             * https://developer.android.google.cn/jetpack/compose/text
              */
             item { }
         }
