@@ -1,16 +1,15 @@
 package com.jyn.composeroad
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jyn.composeroad.base.BaseActivity
+import com.jyn.composeroad.state.StateActivity
 import com.jyn.composeroad.state.StateTest
 import com.jyn.composeroad.state.StateViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,14 +40,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
-    private val stateViewModel: StateViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ListTest()
-        }
+        setContent { ListTest() }
     }
 
     /*
@@ -98,10 +93,18 @@ class MainActivity : BaseActivity() {
                 )
             }
 
-            /*
-             * Button & 状态管理
-             */
-            item { StateTest(stateViewModel) }
+            // Spacer
+            item { Spacer(modifier = Modifier.height(5.dp)) }
+
+            // Button & 状态管理
+            item {
+                Button(
+                    onClick = { goto(StateActivity::class.java) },
+                    modifier = Modifier.fillMaxWidth()
+                ) { Text(text = "Button & 状态管理") }
+            }
         }
     }
+
+    fun <T> goto(cls: Class<T>) = startActivity(Intent(this@MainActivity, cls))
 }

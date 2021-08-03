@@ -6,6 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 
+/**
+ * 状态管理
+ * https://developer.android.google.cn/jetpack/compose/state
+ */
 class StateViewModel(application: Application) : AndroidViewModel(application) {
 
     //region 状态管理之 liveData
