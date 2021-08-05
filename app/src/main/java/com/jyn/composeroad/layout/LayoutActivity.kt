@@ -7,8 +7,11 @@ import androidx.activity.compose.setContent
 /**
  * 布局概述
  * https://compose.net.cn/layout/overview/
+ *
+ * Jetpack Compose 基础 | 布局
+ * https://juejin.cn/post/6952129655264673805
  */
-class MainActivity : ComponentActivity() {
+class LayoutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

@@ -17,6 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jyn.composeroad.base.BaseActivity
+import com.jyn.composeroad.layout.LayoutActivity
 import com.jyn.composeroad.state.StateActivity
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +42,6 @@ import dagger.hilt.android.AndroidEntryPoint
  * Compose博物馆：https://compose.net.cn/
  * https://github.com/compose-museum/hi-compose
  */
-
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
@@ -76,54 +77,57 @@ class MainActivity : BaseActivity() {
             // 颜色(Color) 排版(Typography) 形状(Shape)
             item { Typography() }
 
-            // Spacer
+            /*
+             * Spacer
+             * https://compose.net.cn/layout/spacer/
+             */
             item { Spacer(modifier = Modifier.height(5.dp)) }
 
-            // Button & 状态管理
-            item { ButtonAndState() }
+            // 状态管理
+            item { GoToBtn(StateActivity::class.java, "状态管理") }
 
-            /**
+            /*
              * 布局 :
              * https://compose.net.cn/layout/overview/
              * https://developer.android.google.cn/jetpack/compose/layouts
              */
-            item { }
+            item { GoToBtn(LayoutActivity::class.java, "布局") }
 
-            /**
+            /*
              * 动画
              * https://compose.net.cn/design/animation/overview/
              * https://developer.android.google.cn/jetpack/compose/animation
              */
             item { }
 
-            /**
+            /*
              * 主题 : 如何为基于 Compose 的界面设置主题背景
              * https://compose.net.cn/design/theme/overview/
              * https://developer.android.google.cn/jetpack/compose/themes
              */
             item { }
 
-            /**
+            /*
              * 手势 : 检测用户手势并与之互动
              * https://compose.net.cn/design/gesture/overview/
              * https://developer.android.google.cn/jetpack/compose/gestures
              */
             item { }
 
-            /**
+            /*
              * 列表 : 管理和显示数据列表的一些选项
              * https://compose.net.cn/design/lists/overview/
              * https://developer.android.google.cn/jetpack/compose/lists
              */
             item { }
 
-            /**
+            /*
              * 图形 : 构建和处理自定义图形的功能
              * https://developer.android.google.cn/jetpack/compose/graphics
              */
             item { }
 
-            /**
+            /*
              * 文本
              * https://developer.android.google.cn/jetpack/compose/text
              */
@@ -159,18 +163,21 @@ class MainActivity : BaseActivity() {
             targetValue = if (isExpanded) Color(0xFFCCCCCC) else MaterialTheme.colors.surface
         )
 
+        //竖向排列
         Column(modifier = Modifier
             // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果，顺序很重要
             .clickable { isExpanded = !isExpanded }
-            .background(surfaceColor)
-            .padding(all = 5.dp) //如果放在前面可能会导致background少了这个5dp
+            .background(color = surfaceColor)
+            //如果放在前面可能会导致background少了这个5dp
+            .padding(all = 5.dp)
         ) {
+            //横向排列
             Row {
                 Image(
                     painter = painterResource(id = R.mipmap.logo),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(26.dp)
+                        .size(20.dp)
                         .clip(CircleShape)
                         // 添加边框
                         .border(
@@ -178,7 +185,12 @@ class MainActivity : BaseActivity() {
                             MaterialTheme.colors.secondary,
                             shape = CircleShape
                         )
+                        //对齐方式
+                        .align(Alignment.CenterVertically)
                 )
+
+                Spacer(modifier = Modifier.width(5.dp))
+
                 Text(
                     "Hello Compose",
                     color = MaterialTheme.colors.secondaryVariant,
@@ -196,10 +208,10 @@ class MainActivity : BaseActivity() {
     }
 
     @Composable
-    fun ButtonAndState() {
+    fun <T> GoToBtn(cls: Class<T>, text: String) {
         Button(
-            onClick = { goto(StateActivity::class.java) },
+            onClick = { goto(cls) },
             modifier = Modifier.fillMaxWidth()
-        ) { Text(text = "Button & 状态管理") }
+        ) { Text(text = "text") }
     }
 }

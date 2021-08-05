@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeRoad">
         <activity
-            android:name=".layout.MainActivity"
+            android:name=".layout.LayoutActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.ComposeRoad.NoActionBar" />
