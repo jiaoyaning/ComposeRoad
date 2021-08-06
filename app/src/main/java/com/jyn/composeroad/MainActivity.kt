@@ -212,6 +212,6 @@ class MainActivity : BaseActivity() {
         Button(
             onClick = { goto(cls) },
             modifier = Modifier.fillMaxWidth()
-        ) { Text(text = "text") }
+        ) { Text(text) }
     }
 }
