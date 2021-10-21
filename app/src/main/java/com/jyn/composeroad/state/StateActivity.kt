@@ -37,7 +37,7 @@ class StateActivity : ComponentActivity() {
             /*
            * Button & 状态管理
            */
-            item { StateTest(stateViewModel) }
+            item { StateTest() }
         }
     }
 }

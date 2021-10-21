@@ -2,6 +2,7 @@ package com.jyn.composeroad
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -28,9 +29,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.layout.LayoutActivity
 import com.jyn.composeroad.state.StateActivity
+import com.jyn.composeroad.state.StateViewModel
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,6 +48,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
+    val viewModel: StateViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { ComposeRoadTheme { ListTest() } }
@@ -52,14 +57,14 @@ class MainActivity : BaseActivity() {
 
     /*
      * Preview的注解中比较常用的参数如下：
-     *  name: String: 为该Preview命名，该名字会在布局预览中显示。
-     *  showBackground: Boolean: 是否显示背景，true为显示。
-     *  backgroundColor: Long: 设置背景的颜色。
-     *  showDecoration: Boolean: 是否显示Statusbar和Toolbar，true为显示。
-     *  group: String: 为该Preview设置group名字，可以在UI中以group为单位显示。
-     *  fontScale: Float: 可以在预览中对字体放大，范围是从0.01。
-     *  widthDp: Int: 在Compose中渲染的最大宽度，单位为dp。
-     *  heightDp: Int: 在Compose中渲染的最大高度，单位为dp。
+     *  name: String:               为该Preview命名，该名字会在布局预览中显示。
+     *  showBackground: Boolean:    是否显示背景，true为显示。
+     *  backgroundColor: Long:      设置背景的颜色。
+     *  showDecoration: Boolean:    是否显示Statusbar和Toolbar，true为显示。
+     *  group: String:              为该Preview设置group名字，可以在UI中以group为单位显示。
+     *  fontScale: Float:           可以在预览中对字体放大，范围是从0.01。
+     *  widthDp: Int:               在Compose中渲染的最大宽度，单位为dp。
+     *  heightDp: Int:              在Compose中渲染的最大高度，单位为dp。
      */
     @Preview(showBackground = true)
     @Composable
@@ -135,6 +140,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    @Preview(showBackground = true)
     @Composable
     fun Image() {
         Surface(
@@ -153,6 +159,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    @Preview(showBackground = true)
     @Composable
     fun Typography() {
         // 创建一个能够检测卡片十分被展开的变量

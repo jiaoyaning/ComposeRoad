@@ -1,5 +1,6 @@
 package com.jyn.composeroad.state
 
+import androidx.lifecycle.viewmodel.compose.*
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -12,11 +13,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-/**
+/*
  * https://developer.android.google.cn/jetpack/compose/state
  */
 @Composable
-fun StateTest(viewModel: StateViewModel) {
+fun StateTest() {
+    /**
+     * viewModel()文档
+     * https://developer.android.google.cn/jetpack/compose/libraries
+     */
+    val viewModel: StateViewModel by viewModel()
+
     var remember by remember { mutableStateOf(0) }//不保持状态
     Btn(
         onClick = { remember++ },
