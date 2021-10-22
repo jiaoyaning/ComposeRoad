@@ -22,7 +22,7 @@ fun StateTest() {
      * viewModel()文档
      * https://developer.android.google.cn/jetpack/compose/libraries
      */
-    val viewModel: StateViewModel by viewModel()
+    val viewModel: StateViewModel = viewModel() //必须是 = 而不是 by
 
     var remember by remember { mutableStateOf(0) }//不保持状态
     Btn(
