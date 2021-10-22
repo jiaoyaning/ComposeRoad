@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.layout.LayoutActivity
 import com.jyn.composeroad.state.StateActivity
@@ -175,7 +174,7 @@ class MainActivity : BaseActivity() {
             // 添加 Modifier 的 clickable 扩展方法，可以让元素具有点击的效果，顺序很重要
             .clickable { isExpanded = !isExpanded }
             .background(color = surfaceColor)
-            //如果放在前面可能会导致background少了这个5dp
+            //padding放background前面会产生margin效果
             .padding(all = 5.dp)
         ) {
             //横向排列

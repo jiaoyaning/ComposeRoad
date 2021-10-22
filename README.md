@@ -1,13 +1,11 @@
-<<<<<<< HEAD
 #博客
 (图解 Modifier 背后原理 ，竟如此简单！)[https://juejin.cn/post/6986933061845778446]
-=======
+
 ## Jetpack Compose 测量流程源码分析
 https://juejin.cn/post/6981805443219718151
 
 ## 图解 Modifier 背后原理 ，竟如此简单！
 https://juejin.cn/post/6986933061845778446
->>>>>>> 78805a4186fbe396e6516102a2afc27ddd820f2a
 
 (Compose Modifier修饰符绝对详细的解说，学不会你打我表弟)[https://juejin.cn/post/6978109557121744932]
 
