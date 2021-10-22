@@ -11,6 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeRoad">
         <activity
+            android:name=".navigation.NavigationActivity"
+            android:exported="true"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/Theme.ComposeRoad" />
+        <activity
             android:name=".layout.LayoutActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
