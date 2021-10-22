@@ -35,7 +35,7 @@ import com.jyn.composeroad.state.StateActivity
 import com.jyn.composeroad.state.StateViewModel
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
-
+import androidx.lifecycle.viewmodel.compose.*
 /*
  * 官方教程 & 文档
  * https://developer.android.google.cn/jetpack/compose
@@ -47,7 +47,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
-    val viewModel: StateViewModel by viewModels()
+    /**
+     * 此处跟 Composable 中 [viewModel] 方法所生成的对象并不是同一个
+     */
+    private val stateViewModel: StateViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
