@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
-         *[setContent] 方法不需要设置 @Composable是因为，它只起到传递作用，真正需要添加的应该这个lambda作用域
+         *[setContent]方法不需要设置[Composable]注解是因为它只起到传递作用，真正需要添加的应该这个lambda作用域
          */
         setContent { ComposeRoadTheme { ListTest() } }
     }
@@ -79,7 +79,7 @@ class MainActivity : BaseActivity() {
      *
      * 二、@Composable 作用
      *  用来给编译器(非注解处理器)来识别并插入额外的参数和调用，如`$composer.start(123)`和`$composer.end()`，
-     *  这样在UI更新的时候，可以在间隙缓冲区中快速找出被更新的位置，并发动重组。
+     *  这样在UI更新的时候，可以在 [间隙缓冲区] 中快速找出被更新的位置，并发动重组。
      *
      *  @Composable 类似 suspend 都是编译器在额外处理，
      *  至于为什么不能把@Composable也设计成关键字？因为@Composable是属于jetpack的UI框架，而不是kotlin的语言特性
