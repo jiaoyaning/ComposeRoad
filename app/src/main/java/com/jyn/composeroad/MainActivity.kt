@@ -36,6 +36,7 @@ import com.jyn.composeroad.state.StateViewModel
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.viewmodel.compose.*
+
 /*
  * 官方教程 & 文档
  * https://developer.android.google.cn/jetpack/compose
@@ -43,6 +44,10 @@ import androidx.lifecycle.viewmodel.compose.*
  *
  * Compose博物馆：https://compose.net.cn/
  * https://github.com/compose-museum/hi-compose
+ *
+ * 深入详解 Jetpack Compose | 优化 UI 构建 | 实现原理
+ * https://juejin.cn/post/6885900954307133448
+ * https://juejin.cn/post/6889797083667267598
  */
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -54,11 +59,14 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /**
+         *[setContent] 方法不需要设置 @Composable是因为，它只起到传递作用，真正需要添加的应该这个lambda作用域
+         */
         setContent { ComposeRoadTheme { ListTest() } }
     }
 
     /*
-     * Preview的注解中比较常用的参数如下：
+     * 一、@Preview 常用的参数如下：
      *  name: String:               为该Preview命名，该名字会在布局预览中显示。
      *  showBackground: Boolean:    是否显示背景，true为显示。
      *  backgroundColor: Long:      设置背景的颜色。
@@ -67,6 +75,14 @@ class MainActivity : BaseActivity() {
      *  fontScale: Float:           可以在预览中对字体放大，范围是从0.01。
      *  widthDp: Int:               在Compose中渲染的最大宽度，单位为dp。
      *  heightDp: Int:              在Compose中渲染的最大高度，单位为dp。
+     *
+     *
+     * 二、@Composable 作用
+     *  用来给编译器(非注解处理器)来识别并插入额外的参数和调用，如`$composer.start(123)`和`$composer.end()`，
+     *  这样在UI更新的时候，可以在间隙缓冲区中快速找出被更新的位置，并发动重组。
+     *
+     *  @Composable 类似 suspend 都是编译器在额外处理，
+     *  至于为什么不能把@Composable也设计成关键字？因为@Composable是属于jetpack的UI框架，而不是kotlin的语言特性
      */
     @Preview(showBackground = true)
     @Composable

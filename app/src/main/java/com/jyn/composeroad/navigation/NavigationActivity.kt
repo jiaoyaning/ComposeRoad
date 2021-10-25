@@ -3,6 +3,8 @@ package com.jyn.composeroad.navigation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 
 /*
@@ -12,6 +14,11 @@ import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 class NavigationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { ComposeRoadTheme {} }
+        setContent { ComposeRoadTheme {TextView()} }
+    }
+
+    @Composable
+    fun TextView(){
+        Text("这是一个测试")
     }
 }
