@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.jyn.composeroad.base.Btn
 
 class StateActivity : ComponentActivity() {
     /**
@@ -27,8 +28,8 @@ class StateActivity : ComponentActivity() {
      *
      * PS：by关键字需要用var修饰
      */
-    val mutableStateOf1 = mutableStateOf(0)
-    var mutableStateOf2 by mutableStateOf(0)
+    private val mutableStateOf1 = mutableStateOf(0)
+    private var mutableStateOf2 by mutableStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +47,17 @@ class StateActivity : ComponentActivity() {
             ),
             verticalArrangement = Arrangement.spacedBy(5.dp) //在每个项目之间增加了 4.dp 的空间
         ) {
+            item {
+                Btn(onClick = { }, text = "mutableStateOf = ${mutableStateOf1.value}")
+            }
+
+            item {
+                Btn(onClick = { }, text = "mutableStateOf by $mutableStateOf2")
+            }
+
             /*
-           * Button & 状态管理
-           */
+             * Button & 状态管理
+             */
             item { StateTest() }
         }
     }

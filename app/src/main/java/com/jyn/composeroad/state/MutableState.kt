@@ -12,6 +12,7 @@ import androidx.compose.runtime.rxjava2.subscribeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.jyn.composeroad.base.Btn
 
 /*
  * 官网：https://developer.android.google.cn/jetpack/compose/state
@@ -62,15 +63,4 @@ fun StateTest() {
         onClick = { viewModel.rxJava2Add(rxJava2) },
         text = "rxJava2 Button $rxJava2"
     )
-}
-
-@Composable
-fun Btn(onClick: () -> Unit, text: String) {
-    Spacer(modifier = Modifier.height(5.dp))
-    Button(
-        onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Text(text = text)
-    }
 }
