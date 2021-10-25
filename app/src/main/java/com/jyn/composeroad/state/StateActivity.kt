@@ -8,10 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,9 +24,11 @@ class StateActivity : ComponentActivity() {
     /*
      * =号 创建的mutableStateOf对象，使用的时候需要加value，比如mutableStateOf1.value
      * by 代理创建的mutableStateOf对象则可以直接使用，具体原理是使用了扩展函数
+     *
+     * PS：by关键字需要用var修饰
      */
     val mutableStateOf1 = mutableStateOf(0)
-    val mutableStateOf2 by mutableStateOf(0)
+    var mutableStateOf2 by mutableStateOf(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
