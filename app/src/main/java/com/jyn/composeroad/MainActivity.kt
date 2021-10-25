@@ -67,22 +67,21 @@ class MainActivity : BaseActivity() {
 
     /*
      * 一、@Preview 常用的参数如下：
-     *  name: String:               为该Preview命名，该名字会在布局预览中显示。
-     *  showBackground: Boolean:    是否显示背景，true为显示。
-     *  backgroundColor: Long:      设置背景的颜色。
-     *  showDecoration: Boolean:    是否显示Statusbar和Toolbar，true为显示。
-     *  group: String:              为该Preview设置group名字，可以在UI中以group为单位显示。
-     *  fontScale: Float:           可以在预览中对字体放大，范围是从0.01。
-     *  widthDp: Int:               在Compose中渲染的最大宽度，单位为dp。
-     *  heightDp: Int:              在Compose中渲染的最大高度，单位为dp。
-     *
+     *      name: String:               为该Preview命名，该名字会在布局预览中显示。
+     *      showBackground: Boolean:    是否显示背景，true为显示。
+     *      backgroundColor: Long:      设置背景的颜色。
+     *      showDecoration: Boolean:    是否显示Statusbar和Toolbar，true为显示。
+     *      group: String:              为该Preview设置group名字，可以在UI中以group为单位显示。
+     *      fontScale: Float:           可以在预览中对字体放大，范围是从0.01。
+     *      widthDp: Int:               在Compose中渲染的最大宽度，单位为dp。
+     *      heightDp: Int:              在Compose中渲染的最大高度，单位为dp。
      *
      * 二、@Composable 作用
-     *  用来给编译器(非注解处理器)来识别并插入额外的参数和调用，如`$composer.start(123)`和`$composer.end()`，
-     *  这样在UI更新的时候，可以在 [间隙缓冲区] 中快速找出被更新的位置，并发动重组。
+     *      用来给编译器(非注解处理器)来识别并插入额外的参数和调用，如`$composer.start(123)`和`$composer.end()`，
+     *      这样在UI更新的时候，可以在 [间隙缓冲区] 中快速找出被更新的位置，并发动重组。
      *
-     *  @Composable 类似 suspend 都是编译器在额外处理，
-     *  至于为什么不能把@Composable也设计成关键字？因为@Composable是属于jetpack的UI框架，而不是kotlin的语言特性
+     *      @Composable 类似 suspend 都是编译器在额外处理，
+     *      至于为什么不能把@Composable也设计成关键字？因为@Composable是属于jetpack的UI框架，而不是kotlin的语言特性
      */
     @Preview(showBackground = true)
     @Composable

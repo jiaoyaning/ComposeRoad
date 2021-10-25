@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 /*
- * https://developer.android.google.cn/jetpack/compose/state
+ * 官网：https://developer.android.google.cn/jetpack/compose/state
  */
 @Composable
 fun StateTest() {
@@ -23,6 +23,16 @@ fun StateTest() {
      * https://developer.android.google.cn/jetpack/compose/libraries
      */
     val viewModel: StateViewModel = viewModel() //必须是 = 而不是 by
+
+
+    /**
+     * mutableStateOf
+     *      给变量赋予监听数值变化的能力，从而会触发使用该值的View进行重绘。
+     * remember
+     *      remember 在 mutableStateOf 之上又增加了一层内容：把这个变量的值存储脱离函数，即这个函数再次执行这个值并不会变成初始值。
+     * rememberSaveable
+     *      在remember 上保证了可以在页面切换的过程中保存数据。
+     */
 
     var remember by remember { mutableStateOf(0) }//不保持状态
     Btn(
