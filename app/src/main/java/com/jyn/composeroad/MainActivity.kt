@@ -36,6 +36,7 @@ import com.jyn.composeroad.state.StateViewModel
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.viewmodel.compose.*
+import com.jyn.composeroad.base.Btn
 
 /*
  * 官方教程 & 文档
@@ -106,14 +107,14 @@ class MainActivity : BaseActivity() {
             item { Spacer(modifier = Modifier.height(5.dp)) }
 
             // 状态管理
-            item { GoToBtn(StateActivity::class.java, "状态管理") }
+            item { Btn("状态管理") { goto(StateActivity::class.java) } }
 
             /*
              * 布局 :
              * https://compose.net.cn/layout/overview/
              * https://developer.android.google.cn/jetpack/compose/layouts
              */
-            item { GoToBtn(LayoutActivity::class.java, "布局") }
+            item { Btn("布局") { goto(LayoutActivity::class.java) } }
 
             /*
              * 动画
@@ -229,13 +230,5 @@ class MainActivity : BaseActivity() {
                 modifier = Modifier.animateContentSize() // Composable 大小的动画效果
             )
         }
-    }
-
-    @Composable
-    fun <T> GoToBtn(cls: Class<T>, text: String) {
-        Button(
-            onClick = { goto(cls) },
-            modifier = Modifier.fillMaxWidth()
-        ) { Text(text) }
     }
 }
