@@ -14,14 +14,20 @@ import com.jyn.composeroad.base.Btn
  */
 
 
-/*
+/**
  * =号 创建的mutableStateOf对象，使用的时候需要加value，比如mutableStateOf1.value
  * by 代理创建的mutableStateOf对象则可以直接使用，具体原理是使用了扩展函数
  *
  * PS：by关键字需要用var修饰
+ * PS：[mutableStateOf] 只有在被调用 [setValue] 且 equals() 不同时才会发起重组
+ *     data class 类下如果是var属性，就算equals相同也会发生重组，val则是不会
+ *
+ * [mutableStateListOf] 和 [mutableStateMapOf] 可以实现元素有改动时即发起重组，不用非要调用[setValue]
  */
-private val mutableStateOf1 = mutableStateOf(0) //需要放到全局变量才会有用
-private var mutableStateOf2 by mutableStateOf(0)
+private val mutableState1 = mutableStateOf(0) //需要放到全局变量才会有用
+private var mutableState2 by mutableStateOf(0)
+private var mutableStateList = mutableStateListOf(Array(5) { it })
+private var mutableStateMap = mutableStateMapOf(1 to "A", 2 to "B", 3 to "C", 4 to "D")
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
@@ -45,16 +51,16 @@ fun StateTest() {
 
     //1. =号 创建的mutableStateOf
     Btn(
-        "mutableStateOf = ${mutableStateOf1.value}",
+        "mutableStateOf = ${mutableState1.value}",
         "1、=号 创建的mutableStateOf"
-    ) { mutableStateOf1.value += 1 }
+    ) { mutableState1.value += 1 }
 
 
     //2. by关键字创建的mutableStateOf
     Btn(
-        "mutableStateOf by $mutableStateOf2",
+        "mutableStateOf by $mutableState2",
         "2、by关键字创建的mutableStateOf"
-    ) { mutableStateOf2 += 1 }
+    ) { mutableState2 += 1 }
 
 
     //3. 局部变量的mutableStateOf测试
