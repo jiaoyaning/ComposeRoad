@@ -13,6 +13,7 @@ import androidx.compose.runtime.rxjava2.subscribeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.apkfuns.logutils.LogUtils
 import com.jyn.composeroad.base.Btn
 
 /*
@@ -32,6 +33,7 @@ private var mutableStateOf2 by mutableStateOf(0)
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun StateTest() {
+    LogUtils.tag("MutableState").i("我被调用了 ----> StateTest()") //每次重绘都会被调用
     /**
      * viewModel()文档
      * https://developer.android.google.cn/jetpack/compose/libraries
@@ -48,43 +50,64 @@ fun StateTest() {
      *      在remember 上保证了可以在页面切换的过程中保存数据。
      */
 
+    //1. =号 创建的mutableStateOf
     Btn(
         onClick = { mutableStateOf1.value += 1 },
-        text = "mutableStateOf = ${mutableStateOf1.value}"
+        text = "mutableStateOf = ${mutableStateOf1.value}",
+        des = "1、=号 创建的mutableStateOf"
     )
 
-    Btn(onClick = { mutableStateOf2 += 1 }, text = "mutableStateOf by $mutableStateOf2")
+    //2. by关键字创建的mutableStateOf
+    Btn(
+        onClick = { mutableStateOf2 += 1 },
+        text = "mutableStateOf by $mutableStateOf2",
+        des = "2、by关键字创建的mutableStateOf"
+    )
 
+    //3. 局部变量的mutableStateOf测试
     var mutableStateOf3 by mutableStateOf(0)
+    Btn(
+        onClick = { mutableStateOf3 += 1 },
+        text = "mutableStateOf局部变量 $mutableStateOf3",
+        des = "3、局部变量的mutableStateOf测试"
+    )
 
-    Btn(onClick = { mutableStateOf3 += 1 }, text = "mutableStateOf局部变量 $mutableStateOf3")
-
+    //4. remember 创建的mutableStateOf
     var remember by remember { mutableStateOf(0) }//不保持状态
     Btn(
         onClick = { remember++ },
-        text = "remember Button $remember"
+        text = "remember Button $remember",
+        des = "4、remember 创建的mutableStateOf"
     )
 
+    //5. rememberSaveable 创建的mutableStateOf
     var rememberSaveable by rememberSaveable { mutableStateOf(0) }//保持状态
     Btn(
         onClick = { rememberSaveable++ },
-        text = "rememberSaveable Button $rememberSaveable"
+        text = "rememberSaveable Button $rememberSaveable",
+        des = "5、rememberSaveable 创建的mutableStateOf"
     )
 
+    //6. liveData转State
     val liveData by viewModel.liveData.observeAsState()//保持状态
     Btn(
         onClick = { viewModel.liveDataAdd() },
-        text = "liveData Button $liveData"
+        text = "liveData Button $liveData",
+        des = "6、liveData转State"
     )
 
+    //7. flow转State
     Btn(
         onClick = { },
-        text = "flow Button TODO"
+        text = "flow Button TODO",
+        des = "7、flow转State"
     )
 
+    //8. rxjava转State
     val rxJava2 by viewModel.observable.subscribeAsState(initial = 0)//不保持状态
     Btn(
         onClick = { viewModel.rxJava2Add(rxJava2) },
-        text = "rxJava2 Button $rxJava2"
+        text = "rxJava2 Button $rxJava2",
+        des = "8、rxjava转State"
     )
 }
