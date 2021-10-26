@@ -22,15 +22,6 @@ class StateActivity : ComponentActivity() {
      */
     private val stateViewModel: StateViewModel by viewModels()
 
-    /*
-     * =号 创建的mutableStateOf对象，使用的时候需要加value，比如mutableStateOf1.value
-     * by 代理创建的mutableStateOf对象则可以直接使用，具体原理是使用了扩展函数
-     *
-     * PS：by关键字需要用var修饰
-     */
-    private val mutableStateOf1 = mutableStateOf(0)
-    private var mutableStateOf2 by mutableStateOf(0)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { StateView() }
@@ -47,14 +38,6 @@ class StateActivity : ComponentActivity() {
             ),
             verticalArrangement = Arrangement.spacedBy(5.dp) //在每个项目之间增加了 4.dp 的空间
         ) {
-            item {
-                Btn(onClick = { }, text = "mutableStateOf = ${mutableStateOf1.value}")
-            }
-
-            item {
-                Btn(onClick = { }, text = "mutableStateOf by $mutableStateOf2")
-            }
-
             /*
              * Button & 状态管理
              */
