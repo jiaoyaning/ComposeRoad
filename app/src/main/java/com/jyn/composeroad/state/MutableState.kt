@@ -10,9 +10,9 @@ import com.apkfuns.logutils.LogUtils
 import com.jyn.composeroad.base.Btn
 
 /*
- * state官网：https://developer.android.google.cn/jetpack/compose/state
+ * 管理状态：https://developer.android.google.cn/jetpack/compose/state
+ * 可组合项的生命周期：https://developer.android.google.cn/jetpack/compose/lifecycle
  */
-
 
 /**
  * =号 创建的mutableStateOf对象，使用的时候需要加value，比如mutableStateOf1.value
@@ -20,7 +20,10 @@ import com.jyn.composeroad.base.Btn
  *
  * PS：by关键字需要用var修饰
  * PS：[mutableStateOf] 只有在被调用 [setValue] 且 equals() 不同时才会发起重组
- *     data class 类下如果是var属性，就算equals相同也会发生重组，val则是不会
+ *      (如果对象改变，即使前后两个对象的equals()相同，也会发起重组)
+ *
+ *   data class 类下如果是var属性，就算equals相同也会发生重组，val则不会(因为val不可变，对象始终是一个)
+ *   如果不想让var熟悉重组，则可以给class添加 [Stable] 注解
  *
  * [mutableStateListOf] 和 [mutableStateMapOf] 可以实现元素有改动时即发起重组，不用非要调用[setValue]
  */
