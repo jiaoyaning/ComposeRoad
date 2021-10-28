@@ -43,12 +43,20 @@ import com.jyn.composeroad.base.Btn
  * https://developer.android.google.cn/jetpack/compose
  * https://developer.android.google.cn/jetpack/compose/documentation
  *
+ * Compose 修饰符列表 Modifier列表
+ * https://developer.android.com/jetpack/compose/modifiers-list?hl=zh-cn
+ *
  * Compose博物馆：https://compose.net.cn/
- * https://github.com/compose-museum/hi-compose
  *
  * 深入详解 Jetpack Compose | 优化 UI 构建 | 实现原理
  * https://juejin.cn/post/6885900954307133448
  * https://juejin.cn/post/6889797083667267598
+ *
+ * 图解 Modifier 背后原理 ，竟如此简单！
+ * https://juejin.cn/post/6986933061845778446
+ *
+ * Jetpack Compose 测量流程源码分析
+ * https://juejin.cn/post/6981805443219718151
  */
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
