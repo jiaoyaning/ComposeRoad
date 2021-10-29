@@ -36,6 +36,7 @@ import com.jyn.composeroad.state.StateViewModel
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.viewmodel.compose.*
+import com.jyn.composeroad.animation.AnimationActivity
 import com.jyn.composeroad.base.Btn
 
 /*
@@ -129,7 +130,7 @@ class MainActivity : BaseActivity() {
              * https://compose.net.cn/design/animation/overview/
              * https://developer.android.google.cn/jetpack/compose/animation
              */
-            item { }
+            item {Btn("动画") { goto(AnimationActivity::class.java) } }
 
             /*
              * 主题 : 如何为基于 Compose 的界面设置主题背景
