@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 
@@ -57,6 +58,9 @@ class AnimationActivity : BaseActivity() {
 
             //单个值改变动画
             item { AnimateFloatAsState() }
+
+            //连续值动画
+            item { AnimatableView() }
         }
     }
 
@@ -241,6 +245,64 @@ class AnimationActivity : BaseActivity() {
             ) {
                 Text(if (enabled) "淡出" else "淡入")
             }
+        }
+    }
+
+    /**
+     * Animatable 连续动画，通过animateTo改变值，支持 Float 和 Color
+     *
+     * Animatable 对内容值提供了更多的操作，即 snapTo 和 animateDecay。
+     *  snapTo 将当前值立即设置为目标值。当动画本身不是唯一的数据源，并且必须与其他状态同步时，例如触摸事件，这是非常有用的。
+     *  animateDecay 启动一个从给定速度开始放缓的动画。这对于实现甩动行为很有用。更多信息见手势和动画。
+     */
+    @Composable
+    fun AnimatableView() {
+        var flag by remember { mutableStateOf(true) }
+        val color = remember { Animatable(Color.Gray) }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Box(
+                contentAlignment = Center,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(color.value),
+            ) {
+                Text(
+                    text = "Animatable 支持 Float和Color的连续值变化",
+                    color = Color.White,
+                    fontSize = 13.sp
+                )
+            }
+
+            Spacer(Modifier.width(5.dp))
+
+            Button(
+                onClick = { flag = !flag },
+                modifier = Modifier.align(CenterVertically)
+            ) {
+                Text("切换")
+            }
+        }
+
+        /**
+         * animateTo 需要在协程中运行
+         * LaunchedEffect 创建一个只针对指定键值的持续时间的作用域
+         */
+        LaunchedEffect(flag) {
+            color.animateTo(
+                targetValue = if (flag) {
+                    Color.Gray
+                } else {
+                    Color.Red
+                },
+                animationSpec = tween(1000)
+            )
         }
     }
 }
