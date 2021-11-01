@@ -75,7 +75,7 @@ class AnimationActivity : BaseActivity() {
             item { CrossfadeView() }
 
             //单个值改变动画
-            item { AnimateFloatAsState() }
+            item { AnimateXxAsState() }
 
             //连续值动画
             item { AnimatableView() }
@@ -238,7 +238,7 @@ class AnimationActivity : BaseActivity() {
      * animate*AsState 单个值动画，只需提供结束值（或目标值），API 就会从当前值到指定值开始动画。
      */
     @Composable
-    fun AnimateFloatAsState() {
+    fun AnimateXxAsState() {
         var enabled by remember { mutableStateOf(true) }
         val alpha: Float by animateFloatAsState(
             if (enabled) 1f else 0f,
