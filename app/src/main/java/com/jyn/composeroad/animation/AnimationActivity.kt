@@ -17,7 +17,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -26,11 +25,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jyn.composeroad.R
@@ -38,12 +40,14 @@ import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
 /*
  * 动画
  * https://compose.net.cn/design/animation/overview/
  * https://developer.android.google.cn/jetpack/compose/animation
+ *
+ * Compose 中的附带效应
+ * https://developer.android.com/jetpack/compose/side-effects?hl=zh-cn
  */
 class AnimationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -431,6 +435,7 @@ class AnimationActivity : BaseActivity() {
     @Composable
     fun PointerInput() {
         val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+        var boxSize by remember { mutableStateOf(IntSize(0, 0)) }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -439,6 +444,8 @@ class AnimationActivity : BaseActivity() {
                     0.5.dp,
                     Color.Blue
                 )
+                .onGloballyPositioned {} //全局内容变化时才用
+                .onSizeChanged { boxSize = it }
                 .pointerInput(Unit) {
                     coroutineScope {
                         while (true) {
@@ -459,7 +466,9 @@ class AnimationActivity : BaseActivity() {
                 painter = painterResource(id = R.mipmap.logo),
                 contentDescription = null,
                 modifier = Modifier
-                    .offset { IntOffset(offset.value.x.toInt(), offset.value.y.toInt()) }
+                    .offset {
+                        IntOffset(offset.value.x.toInt(), offset.value.y.toInt())
+                    }
                     .size(20.dp)
                     .clip(CircleShape)
                     // 添加边框
@@ -469,6 +478,10 @@ class AnimationActivity : BaseActivity() {
                         shape = CircleShape
                     )
             )
+        }
+
+        LaunchedEffect(boxSize) {
+            offset.animateTo(Offset(boxSize.width / 2f, boxSize.height / 3f))
         }
     }
 }
