@@ -236,6 +236,8 @@ class AnimationActivity : BaseActivity() {
 
     /**
      * animate*AsState 单个值动画，只需提供结束值（或目标值），API 就会从当前值到指定值开始动画。
+     * 直接操作属性，而不会去拿对象
+     * 本质也是[Animatable]实现，但是相比[Animatable]更便捷，抛弃了[Animatable]设置初始值的功能
      */
     @Composable
     fun AnimateXxAsState() {
@@ -275,8 +277,9 @@ class AnimationActivity : BaseActivity() {
         }
     }
 
+
     /**
-     * Animatable 连续动画，通过animateTo改变值，支持 Float 和 Color
+     * [Animatable] 连续动画，通过[animateTo]改变值，支持 Float 和 Color
      *
      * Animatable 对内容值提供了更多的操作，即 snapTo 和 animateDecay。
      *  snapTo 将当前值立即设置为目标值。当动画本身不是唯一的数据源，并且必须与其他状态同步时，例如触摸事件，这是非常有用的。
@@ -324,7 +327,7 @@ class AnimationActivity : BaseActivity() {
         LaunchedEffect(flag) {
             color.animateTo(
                 targetValue = if (flag) {
-                    Color.Gray
+                    Color.Red
                 } else {
                     Color.Blue
                 },
