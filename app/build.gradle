@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
         useIR = true
+
+        // @OptIn(ExperimentalAnimationApi::class) 注解用到
+        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         viewBinding true
@@ -78,10 +81,12 @@ dependencies {
      * compose.compiler	    借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
      */
     implementation "androidx.compose.animation:animation:$compose_version"
-    implementation "androidx.compose.compiler:compiler:$compose_version" //上面composeOptions已添加，这里可以不写
+    implementation "androidx.compose.compiler:compiler:$compose_version"
+    //上面composeOptions已添加，这里可以不写
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version" //material扩展图标
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    //material扩展图标
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling:$compose_version" //UI的扩展功能，比如预览
     implementation "androidx.compose.runtime:runtime:$compose_version"
