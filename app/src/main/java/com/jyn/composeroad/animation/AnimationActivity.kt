@@ -4,27 +4,41 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jyn.composeroad.R
 import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 /*
  * 动画
@@ -61,6 +75,15 @@ class AnimationActivity : BaseActivity() {
 
             //连续值动画
             item { AnimatableView() }
+
+            //管理一个或多个动画作为它的子项，并在多个状态之间同时运行它们
+            item { UpdateTransitionView() }
+
+            //循环动画
+            item { RememberInfiniteTransition() }
+
+
+            item { PointerInput() }
         }
     }
 
@@ -113,7 +136,7 @@ class AnimationActivity : BaseActivity() {
                 enter = fadeIn(), //可以定制复杂效果
                 exit = fadeOut()
             ) {
-                Text(text = "AnimatedVisibility 自定义效果的显示隐藏动画")
+                Text(text = "AnimatedVisibility 自定义效果的显示隐藏动画", fontSize = 13.sp)
             }
             Spacer(Modifier.width(5.dp))
             Button(
@@ -135,7 +158,7 @@ class AnimationActivity : BaseActivity() {
         var isExpanded by remember { mutableStateOf(false) }
         Box(Modifier.fillMaxWidth()) {
             Text(
-                text = ".animateContentSize() 尺寸改变时动画，点击可缩放行数 \n 这是占位第二行",
+                text = ".animateContentSize() 尺寸改变时动画 \n 这是占位第二行",
                 overflow = TextOverflow.Ellipsis,
                 maxLines = if (isExpanded) 3 else 1,
                 modifier = Modifier
@@ -299,9 +322,152 @@ class AnimationActivity : BaseActivity() {
                 targetValue = if (flag) {
                     Color.Gray
                 } else {
-                    Color.Red
+                    Color.Blue
                 },
                 animationSpec = tween(1000)
+            )
+        }
+    }
+
+
+    /**
+     * 管理一个或多个动画作为它的子项，并在多个状态之间同时运行它们。
+     * 这些状态可以是任何数据类型。在许多情况下，你可以使用一个自定义的枚举类型来确保类型安全。
+     *
+     * updateTransition 可以抽取成一个独立的动画函数，方便使用
+     */
+    @Composable
+    fun UpdateTransitionView() {
+        var flag by remember { mutableStateOf(true) }
+        val transition = updateTransition(flag, label = "")
+
+        /**
+         * 可以使用某个 animate* 扩展函数来定义此过渡效果中的子动画，
+         * 这些 animate* 函数会返回一个动画值，在动画播放过程中，当使用 updateTransition 更新过渡状态时，该值将逐帧更新。
+         */
+        val color = transition.animateColor(label = "", transitionSpec = {
+            when {
+                true isTransitioningTo false -> tween(durationMillis = 1000)
+                else -> tween(durationMillis = 1000) // 动画时间
+            }
+        }) {
+            when (it) {
+                true -> Color.Gray
+                false -> Color.Red
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = CenterVertically,
+            horizontalArrangement = Arrangement.End
+        ) {
+            Box(
+                contentAlignment = Center,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(color.value),
+            ) {
+                Text(
+                    text = "Transition 管理一个或多个动画作为它的子项，并在多个状态之间同时运行它们。",
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    fontSize = 13.sp
+                )
+            }
+
+            Spacer(Modifier.width(5.dp))
+
+            Button(
+                onClick = { flag = !flag },
+                modifier = Modifier.align(CenterVertically)
+            ) {
+                Text("切换")
+            }
+        }
+    }
+
+
+    /**
+     * 循环动画
+     */
+    @Composable
+    fun RememberInfiniteTransition() {
+        val infiniteTransition = rememberInfiniteTransition()
+        val color by infiniteTransition.animateColor(
+            initialValue = Color.Gray, // 初始值
+            targetValue = Color.Green, // 最终值
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    10000,
+                    easing = LinearEasing
+                ), // 一个动画值的转换持续 1 秒，缓和方式为 LinearEasing
+                /*
+                 * 指定动画重复运行的方式，
+                 * Reverse 为 init -> target, target -> init, init -> target
+                 * Repeat 为 init -> target, init -> target, init -> target
+                 */
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+        Box(
+            contentAlignment = Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp)
+                .background(color),
+        ) {
+            Text(
+                text = "rememberInfiniteTransition 循环动画，不会停止",
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                fontSize = 13.sp
+            )
+        }
+    }
+
+    @Composable
+    fun PointerInput() {
+        val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)
+                .border(
+                    0.5.dp,
+                    Color.Blue
+                )
+                .pointerInput(Unit) {
+                    coroutineScope {
+                        while (true) {
+                            // 检测一个点击头事件并获得其位置。
+                            val position = awaitPointerEventScope {
+                                awaitFirstDown().position
+                            }
+                            launch {
+                                // 应用到点击的位置。
+                                offset.animateTo(position)
+                            }
+                        }
+                    }
+                }
+        ) {
+            Text(text = "触摸事件和动画", modifier = Modifier.align(Center))
+            Image(
+                painter = painterResource(id = R.mipmap.logo),
+                contentDescription = null,
+                modifier = Modifier
+                    .offset { IntOffset(offset.value.x.toInt(), offset.value.y.toInt()) }
+                    .size(20.dp)
+                    .clip(CircleShape)
+                    // 添加边框
+                    .border(
+                        1.5.dp,
+                        MaterialTheme.colors.secondary,
+                        shape = CircleShape
+                    )
             )
         }
     }
