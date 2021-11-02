@@ -37,6 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.viewmodel.compose.*
 import com.jyn.composeroad.animation.AnimationActivity
 import com.jyn.composeroad.base.Btn
+import com.jyn.composeroad.view.ViewActivity
 
 /*
  * 官方教程 & 文档
@@ -124,12 +125,14 @@ class MainActivity : BaseActivity() {
              */
             item { Btn("布局") { goto(LayoutActivity::class.java) } }
 
+            item { Btn("自定义") { goto(ViewActivity::class.java) } }
+
             /*
              * 动画
              * https://compose.net.cn/design/animation/overview/
              * https://developer.android.google.cn/jetpack/compose/animation
              */
-            item {Btn("动画") { goto(AnimationActivity::class.java) } }
+            item { Btn("动画") { goto(AnimationActivity::class.java) } }
 
             /*
              * 主题 : 如何为基于 Compose 的界面设置主题背景

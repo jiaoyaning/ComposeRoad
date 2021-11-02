@@ -339,15 +339,13 @@ class AnimationActivity : BaseActivity() {
 
 
     /**
-     * 管理一个或多个动画作为它的子项，并在多个状态之间同时运行它们。
-     * 这些状态可以是任何数据类型。在许多情况下，你可以使用一个自定义的枚举类型来确保类型安全。
-     *
+     * 多属性动画时，可以统一计算，而不是每个单独计算，减少性能损耗
      * updateTransition 可以抽取成一个独立的动画函数，方便使用
      */
     @Composable
     fun UpdateTransitionView() {
         var flag by remember { mutableStateOf(true) }
-        val transition = updateTransition(flag, label = "")
+        val transition = updateTransition(flag, label = "color") //label值可以方便在动画预览查看
 
         /**
          * 可以使用某个 animate* 扩展函数来定义此过渡效果中的子动画，
@@ -440,7 +438,6 @@ class AnimationActivity : BaseActivity() {
     /**
      * Spring 弹簧效果
      */
-    @Preview(showBackground = true)
     @Composable
     fun SpringView() {
         var flag by remember { mutableStateOf(true) }
