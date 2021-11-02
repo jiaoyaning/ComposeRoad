@@ -17,6 +17,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -86,6 +87,8 @@ class AnimationActivity : BaseActivity() {
             //循环动画
             item { RememberInfiniteTransition() }
 
+            //弹簧效果
+            item { SpringView() }
 
             item { PointerInput() }
         }
@@ -282,8 +285,8 @@ class AnimationActivity : BaseActivity() {
      * [Animatable] 连续动画，通过[animateTo]改变值，支持 Float 和 Color
      *
      * Animatable 对内容值提供了更多的操作，即 snapTo 和 animateDecay。
-     *  snapTo 将当前值立即设置为目标值。当动画本身不是唯一的数据源，并且必须与其他状态同步时，例如触摸事件，这是非常有用的。
-     *  animateDecay 启动一个从给定速度开始放缓的动画。这对于实现甩动行为很有用。更多信息见手势和动画。
+     *   snapTo 将当前值立即设置为目标值。当动画本身不是唯一的数据源，并且必须与其他状态同步时，例如触摸事件，这是非常有用的。
+     *   animateDecay 启动一个从给定速度开始放缓的动画。这对于实现甩动行为很有用。更多信息见手势和动画。
      */
     @Composable
     fun AnimatableView() {
@@ -322,15 +325,13 @@ class AnimationActivity : BaseActivity() {
 
         /**
          * animateTo 需要在协程中运行
-         * LaunchedEffect 创建一个只针对指定键值的持续时间的作用域
+         *
+         * LaunchedEffect 创建一个只针对指定键值的持续时间的作用域，重组的时候不会重复执行，
+         * key：根据这个值的改变来判断是否重启协程内的代码
          */
         LaunchedEffect(flag) {
             color.animateTo(
-                targetValue = if (flag) {
-                    Color.Red
-                } else {
-                    Color.Blue
-                },
+                targetValue = if (flag) Color.Red else Color.Blue,
                 animationSpec = tween(1000)
             )
         }
@@ -432,6 +433,60 @@ class AnimationActivity : BaseActivity() {
                 textAlign = TextAlign.Center,
                 fontSize = 13.sp
             )
+        }
+    }
+
+
+    /**
+     * Spring 弹簧效果
+     */
+    @Preview(showBackground = true)
+    @Composable
+    fun SpringView() {
+        var flag by remember { mutableStateOf(true) }
+        val value by animateDpAsState(
+            targetValue = if (flag) 100.dp else 200.dp,
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioHighBouncy,
+                stiffness = Spring.StiffnessLow
+            )
+        )
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Box(
+                contentAlignment = Alignment.CenterStart,
+                modifier = Modifier
+                    .weight(1f)
+                    .height(40.dp)
+            ) {
+                Box(
+                    contentAlignment = Alignment.CenterStart,
+                    modifier = Modifier
+                        .height(40.dp)
+                        .width(value)
+                        .background(Color.Red)
+                ) {
+                    Text(
+                        text = "Spring 弹簧效果",
+                        color = Color.White,
+                        fontSize = 13.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+
+            Button(
+                onClick = { flag = !flag },
+                modifier = Modifier.align(CenterVertically)
+            ) {
+                Text(if (flag) "放大" else "缩小")
+            }
         }
     }
 
