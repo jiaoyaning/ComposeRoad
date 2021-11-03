@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeRoad">
         <activity
-            android:name=".view.ViewActivity"
+            android:name=".graphics.GraphicsActivity"
             android:exported="false" />
         <activity
             android:name=".animation.AnimationActivity"

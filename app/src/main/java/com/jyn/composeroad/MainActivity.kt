@@ -37,7 +37,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.lifecycle.viewmodel.compose.*
 import com.jyn.composeroad.animation.AnimationActivity
 import com.jyn.composeroad.base.Btn
-import com.jyn.composeroad.view.ViewActivity
+import com.jyn.composeroad.graphics.GraphicsActivity
 
 /*
  * 官方教程 & 文档
@@ -125,7 +125,7 @@ class MainActivity : BaseActivity() {
              */
             item { Btn("布局") { goto(LayoutActivity::class.java) } }
 
-            item { Btn("自定义") { goto(ViewActivity::class.java) } }
+            item { Btn("自定义") { goto(GraphicsActivity::class.java) } }
 
             /*
              * 动画
@@ -156,10 +156,11 @@ class MainActivity : BaseActivity() {
             item { }
 
             /*
-             * 图形 : 构建和处理自定义图形的功能
+             * 绘制 : 构建和处理自定义图形的功能
              * https://developer.android.google.cn/jetpack/compose/graphics
+             * https://docs.compose.net.cn/design/draw/custom_draw/
              */
-            item { }
+            item { Btn("绘制") { goto(GraphicsActivity::class.java) } }
 
             /*
              * 文本
