@@ -3,15 +3,15 @@ package com.jyn.composeroad.layout
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 
 /*
- * 布局概述
- * https://compose.net.cn/layout/overview/
+ * 自定义布局概述
+ * https://docs.compose.net.cn/layout/custom_layout/
  *
  * Jetpack Compose 基础 | 布局
  * https://juejin.cn/post/6952129655264673805
@@ -19,44 +19,22 @@ import androidx.compose.ui.tooling.preview.Preview
 class LayoutActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            Column {
-                BoxView()
-                RowView()
-                ColumnView()
-                ConstraintLayoutView()
-            }
-        }
+        setContent { ComposeRoadTheme { LayoutList() } }
     }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun BoxView() {
-        Box {
+    /**
+     * 当使用 layout 修饰符时，你传入的回调 lambda 需要包含两个参数：measurable、constraints
+     *  measurable      子元素的测量句柄，通过提供的api完成测量与布局过程
+     *  constraints     子元素的测量约束，包括宽度与高度的最大值与最小值
+     */
 
-        }
-    }
-
-    @Preview(showBackground = true)
     @Composable
-    fun ColumnView() {
-        Column {
+    fun LayoutList() {
+        LazyColumn(
+            contentPadding = PaddingValues(10.dp, 10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
 
         }
     }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun RowView() {
-        Row {
-
-        }
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun ConstraintLayoutView() {
-
-    }
-
 }

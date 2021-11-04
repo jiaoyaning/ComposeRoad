@@ -146,6 +146,7 @@ class GraphicsActivity : BaseActivity() {
     /**
      * 二、drawBehind
      */
+    @Preview(showBackground = true)
     @Composable
     fun DrawBehindView() {
         Row(
@@ -186,6 +187,7 @@ class GraphicsActivity : BaseActivity() {
      * 三、drawWithCache
      * 可以设置缓存，这样在Composable重组的时候可以避免重复初始化
      */
+    @Preview(showBackground = true)
     @Composable
     fun DrawWithCache() {
         Row(

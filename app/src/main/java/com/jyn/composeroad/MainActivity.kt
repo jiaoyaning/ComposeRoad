@@ -120,7 +120,6 @@ class MainActivity : BaseActivity() {
 
             /*
              * 布局 :
-             * https://compose.net.cn/layout/overview/
              * https://developer.android.google.cn/jetpack/compose/layouts
              */
             item { Btn("布局") { goto(LayoutActivity::class.java) } }
