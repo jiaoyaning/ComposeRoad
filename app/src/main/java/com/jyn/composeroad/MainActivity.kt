@@ -124,7 +124,12 @@ class MainActivity : BaseActivity() {
              */
             item { Btn("布局") { goto(LayoutActivity::class.java) } }
 
-            item { Btn("自定义") { goto(GraphicsActivity::class.java) } }
+            /*
+             * 绘制 : 构建和处理自定义图形的功能
+             * https://developer.android.google.cn/jetpack/compose/graphics
+             * https://docs.compose.net.cn/design/draw/custom_draw/
+             */
+            item { Btn("自定义绘制") { goto(GraphicsActivity::class.java) } }
 
             /*
              * 动画
@@ -153,13 +158,6 @@ class MainActivity : BaseActivity() {
              * https://developer.android.google.cn/jetpack/compose/lists
              */
             item { }
-
-            /*
-             * 绘制 : 构建和处理自定义图形的功能
-             * https://developer.android.google.cn/jetpack/compose/graphics
-             * https://docs.compose.net.cn/design/draw/custom_draw/
-             */
-            item { Btn("绘制") { goto(GraphicsActivity::class.java) } }
 
             /*
              * 文本
