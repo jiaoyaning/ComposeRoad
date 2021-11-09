@@ -52,6 +52,8 @@ class GestureActivity : BaseActivity() {
             item { DraggableView() }
 
             item { SwipeableView() }
+
+            item { TransformerView() }
         }
     }
 
@@ -209,9 +211,10 @@ class GestureActivity : BaseActivity() {
                         ),
                         thresholds = { from, to ->
                             if (from == true) {
+                                //锚点间吸附动画的阈值，滑块需移动超过 50% 才会自动吸附到关闭状态
                                 FractionalThreshold(0.5f)
                             } else {
-                                FractionalThreshold(0.5f)
+                                FractionalThreshold(0.7f)
                             }
                         }
                     )
@@ -220,8 +223,11 @@ class GestureActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Transformer双指拖动、缩放与旋转
+     */
     @Composable
-    fun TransformableView() {
+    fun TransformerView() {
 //        Box(modifier = Modifier.transformable())
     }
 
