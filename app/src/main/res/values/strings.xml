@@ -14,4 +14,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="title_activity_animation">AnimationActivity</string>
+    <string name="title_activity_input">InputActivity</string>
 </resources>

@@ -38,6 +38,7 @@ import androidx.lifecycle.viewmodel.compose.*
 import com.jyn.composeroad.animation.AnimationActivity
 import com.jyn.composeroad.base.Btn
 import com.jyn.composeroad.graphics.GraphicsActivity
+import com.jyn.composeroad.gesture.GestureActivity
 
 /*
  * 官方教程 & 文档
@@ -139,16 +140,16 @@ class MainActivity : BaseActivity() {
             item { Btn("动画") { goto(AnimationActivity::class.java) } }
 
             /*
-             * 主题 : 如何为基于 Compose 的界面设置主题背景
-             * https://compose.net.cn/design/theme/overview/
-             * https://developer.android.google.cn/jetpack/compose/themes
-             */
-            item { }
-
-            /*
              * 手势 : 检测用户手势并与之互动
              * https://compose.net.cn/design/gesture/overview/
              * https://developer.android.google.cn/jetpack/compose/gestures
+             */
+            item { Btn("手势") { goto(GestureActivity::class.java) } }
+
+            /*
+             * 主题 : 如何为基于 Compose 的界面设置主题背景
+             * https://compose.net.cn/design/theme/overview/
+             * https://developer.android.google.cn/jetpack/compose/themes
              */
             item { }
 
