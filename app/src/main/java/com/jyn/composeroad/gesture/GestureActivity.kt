@@ -17,12 +17,14 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.apkfuns.logutils.LogUtils
 import com.jyn.composeroad.base.BaseActivity
 import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 import kotlin.math.roundToInt
@@ -33,6 +35,10 @@ import kotlin.math.roundToInt
  * https://developer.android.google.cn/jetpack/compose/gestures
  */
 class GestureActivity : BaseActivity() {
+    companion object {
+        const val TAG = "Gesture"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { ComposeRoadTheme { GestureView() } }
@@ -82,26 +88,59 @@ class GestureActivity : BaseActivity() {
      */
     @Composable
     fun PointerInputView() {
-        Box(contentAlignment = Alignment.Center,
+        var offset by remember { mutableStateOf(Offset.Zero) } //位移
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onDoubleTap = { toast("双击") },
-                        onLongPress = { toast("长按") },
-                        onPress = { toast("按下") },
-                        onTap = { toast("单击") }
-                    )
-
-                    forEachGesture {
-                        awaitPointerEventScope {
-                            val event = awaitPointerEvent()
-                        }
-                    }
-                }
                 .fillMaxWidth()
-                .height(40.dp)
+                .height(100.dp)
                 .background(Color.Gray)
-        ) { Text(text = "pointerInput 测试") }
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                    .background(Color.Blue)
+                    .pointerInput(Unit) {
+                        /**
+                         * 监听拖动手势
+                         */
+                        detectDragGestures(
+                            onDragStart = {
+                                LogUtils
+                                    .tag(TAG)
+                                    .i("detectDragGestures(拖动手势) -> 拖动开始")
+                            },
+                            onDragEnd = {
+                                LogUtils
+                                    .tag(TAG)
+                                    .i("detectDragGestures(拖动手势) -> 拖动结束")
+                            },
+                            onDragCancel = {
+                                LogUtils
+                                    .tag(TAG)
+                                    .i("detectDragGestures(拖动手势) -> 拖动取消")
+                            },
+                            onDrag = { change: PointerInputChange, dragAmount: Offset ->
+                                offset += dragAmount
+                                LogUtils
+                                    .tag(TAG)
+                                    .i("detectDragGestures(拖动手势) -> 拖动中")
+                            }
+                        )
+
+                        /**
+                         * 监听点击手势
+                         */
+                        detectTapGestures(
+                            onDoubleTap = {},//双击
+                            onLongPress = {},//长按
+                            onPress = {},//按下
+                            onTap = {}//单击
+                        )
+                    }
+            )
+        }
     }
 
     /**
@@ -139,7 +178,7 @@ class GestureActivity : BaseActivity() {
                 .height(100.dp)
                 .background(Color.Gray)
                 .scrollable(
-                    orientation = Orientation.Vertical,
+                    orientation = Orientation.Horizontal,
                     state = rememberScrollableState { delta ->
                         offset += delta
                         delta
