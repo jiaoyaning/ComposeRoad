@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeRoad">
         <activity
+            android:name=".view.ViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".gesture.GestureActivity"
             android:exported="false" />
         <activity
