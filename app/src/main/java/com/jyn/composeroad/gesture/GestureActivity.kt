@@ -13,6 +13,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
@@ -225,10 +228,44 @@ class GestureActivity : BaseActivity() {
 
     /**
      * Transformer双指拖动、缩放与旋转
+     *
+     *  transformableState：通过使用 rememberTransformableState 可以创建一个 transformableState, 通过 rememberTransformableState 的尾部 lambda 可以获取当前双指拖动、缩放或旋转手势信息。
+     *      通过 transformableState 还允许开发者根据需求动态对 UI 组件进行双指拖动、缩放或旋转操作，最终都会 rememberTransformableState 的尾部 lambda 回调。
+     *  lockRotationOnZoomPan(可选参数)：当主动设置为 true 时，当UI组件已发生双指拖动或缩放时，将获取不到旋转角度偏移量信息。
      */
     @Composable
     fun TransformerView() {
-//        Box(modifier = Modifier.transformable())
-    }
+        var rotate by remember { mutableStateOf(0f) } //旋转角度
+        var scale by remember { mutableStateOf(1f) } //缩放
+        var offset by remember { mutableStateOf(Offset.Zero) } //位移
 
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1f) //宽高比为1
+                .background(Color.Gray),
+            contentAlignment = Alignment.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(100.dp)
+                    .rotate(rotate)// 需要注意 offset 与 rotate 的调用先后顺序
+                    .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                    .scale(scale)
+                    .background(Color.Red)
+                    .transformable(
+                        lockRotationOnZoomPan = false,
+                        /**
+                         * zoomChange: 缩放
+                         * panChange: 位移
+                         * rotationChange: 旋转
+                         */
+                        state = rememberTransformableState { zoomChange: Float, panChange: Offset, rotationChange: Float ->
+                            scale *= zoomChange
+                            offset += panChange
+                            rotate += rotationChange
+                        })
+            )
+        }
+    }
 }
