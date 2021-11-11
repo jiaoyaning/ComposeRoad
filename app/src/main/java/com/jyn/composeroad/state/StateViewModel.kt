@@ -3,9 +3,9 @@ package com.jyn.composeroad.state
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.apkfuns.logutils.LogUtils
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import kotlinx.coroutines.flow.flow
 
 /*
  * 状态管理
@@ -26,6 +26,7 @@ class StateViewModel(application: Application) : AndroidViewModel(application) {
     //endregion
 
     //region 状态管理之Flow
+    var flow= flow<Int> { this.emit(1) }
     //endregion
 
     //region 状态管理之 RxJava2

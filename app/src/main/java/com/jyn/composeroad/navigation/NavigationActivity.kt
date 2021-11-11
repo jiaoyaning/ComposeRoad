@@ -14,11 +14,11 @@ import com.jyn.composeroad.ui.theme.ComposeRoadTheme
 class NavigationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { ComposeRoadTheme {TextView()} }
+        setContent { ComposeRoadTheme { TextView() } }
     }
 
     @Composable
-    fun TextView(){
+    fun TextView() {
         Text("这是一个测试")
     }
 }

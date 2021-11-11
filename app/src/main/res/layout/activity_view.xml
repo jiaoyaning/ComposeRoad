@@ -15,14 +15,20 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="这是一个原生View"
+            android:layout_height="wrap_content"
+            android:text="这是一个原生TextView"
             tools:ignore="HardcodedText" />
 
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/compose_view01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
+
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compose_view02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 </layout>

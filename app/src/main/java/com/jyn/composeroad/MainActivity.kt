@@ -39,6 +39,7 @@ import com.jyn.composeroad.animation.AnimationActivity
 import com.jyn.composeroad.base.Btn
 import com.jyn.composeroad.graphics.GraphicsActivity
 import com.jyn.composeroad.gesture.GestureActivity
+import com.jyn.composeroad.navigation.NavigationActivity
 import com.jyn.composeroad.view.ViewActivity
 
 /*
@@ -148,6 +149,8 @@ class MainActivity : BaseActivity() {
             item { Btn("手势") { goto(GestureActivity::class.java) } }
 
             item { Btn("和原生混合") { goto(ViewActivity::class.java) } }
+
+            item { Btn("Navigation") { goto(NavigationActivity::class.java) } }
 
             /*
              * 主题 : 如何为基于 Compose 的界面设置主题背景

@@ -15,6 +15,8 @@ https://juejin.cn/post/6981805443219718151
 
 (聊聊 Jetpack Compose)[https://mp.weixin.qq.com/s/t-RY6UZIrahCr9dniJiFBQ]
 
+(原理分析， Compose 完全脱离 View 系统了吗?)[https://mp.weixin.qq.com/s/KoGgHd39i_ba_ErTYxIcqA]
+
 #官方demo
 https://github.com/android/compose-samples
 https://github.com/google/accompanist
