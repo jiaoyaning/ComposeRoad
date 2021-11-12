@@ -16,6 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.jyn.composeroad.base.Btn
 
+/*
+ * JetPack Compose 之 state
+ * https://www.jianshu.com/p/93d8a384a8a0
+ *
+ * JetPact Compose状态管理简单理解
+ * https://blog.csdn.net/u012165769/article/details/119973850
+ */
 class StateActivity : ComponentActivity() {
     /**
      * 此ViewModel跟 Composable 中 [viewModel] 方法所生成的对象并不是同一个

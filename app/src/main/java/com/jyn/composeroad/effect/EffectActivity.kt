@@ -10,6 +10,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 
 /*
+ * 官网
+ * https://developer.android.google.cn/jetpack/compose/side-effects
+ *
  * https://juejin.cn/post/7016583915292852254
  * https://juejin.cn/post/6930785944580653070
  */
