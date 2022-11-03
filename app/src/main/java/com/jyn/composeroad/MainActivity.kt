@@ -20,6 +20,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -174,7 +175,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    @Preview(showBackground = true)
+    //    @Preview(showBackground = true)
     @Composable
     fun Image() {
         Surface(
@@ -193,7 +194,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    @Preview(showBackground = true)
+    //    @Preview(showBackground = true)
     @Composable
     fun Typography() {
         // 创建一个能够检测卡片十分被展开的变量
@@ -248,3 +249,23 @@ class MainActivity : BaseActivity() {
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun Hello() {
+    Column(
+        Modifier
+            .padding(3.dp)
+            .clip(CircleShape)
+            .background(Color.Red)
+            .padding(10.dp)
+
+    ) {
+        Text(text = "Hello World")
+        Image(/*region*/
+            painterResource(id = R.mipmap.logo),
+            contentDescription = ""
+            /*endregion*/)
+    }
+}
+

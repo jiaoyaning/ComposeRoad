@@ -3,13 +3,14 @@ package com.jyn.composeroad.view
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.TextView
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
+import androidx.compose.material.TextField
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.databinding.DataBindingUtil
@@ -54,6 +55,9 @@ class ViewActivity : BaseActivity() {
                 )
 
                 Text(text = "这是一个Compose Text 在下面👇")
+
+                val test = remember { mutableStateOf("这是一个Compose 输入框") }
+                TextField(value = test.value, onValueChange = { test.value = it })
             }
         }
     }

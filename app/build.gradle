@@ -6,13 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
-    buildToolsVersion "30.0.3"
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.jyn.composeroad"
         minSdk 21
-        targetSdk 30
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -82,7 +81,7 @@ dependencies {
      * compose.compiler	    借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
      */
     implementation "androidx.compose.animation:animation:$compose_version"
-    implementation "androidx.compose.compiler:compiler:$compose_version"
+//    implementation "androidx.compose.compiler:compiler:$compose_version"
     //上面composeOptions已添加，这里可以不写
     implementation "androidx.compose.foundation:foundation:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
